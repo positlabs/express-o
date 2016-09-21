@@ -34,8 +34,7 @@ app.use(sass({
 	dest: path.join(__dirname, 'public'),
 	indentedSyntax: true,
 	outputStyle: 'compressed',
-	sourceMap: false,
-	// sourceMap: app.get('env') !== 'production',
+	sourceMap: app.get('env') !== 'production',
 	debug: app.get('env') !== 'production'
 }))
 
