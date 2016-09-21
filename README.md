@@ -1,5 +1,15 @@
-# k-plus
-IT'S GOT WHAT PLANTS CRAVE!
+# express-o
+Boilerplate stuff for express projects. 
+
+[Download ZIP](https://github.com/positlabs/express-o/archive/master.zip)
+
+Or run this command to install into the current directory. `curl -LO https://github.com/positlabs/express-o/archive/master.zip && unzip master.zip && rm master.zip && cp -R express-o-master/ ./ && rm ./express-o-master`
+
+Includes...
+
+	- livereload for styles
+	- es6 client-side javascript
+	- local pm2 server for keeping logs and automatically restarting when files change
 
 ## Development
 
