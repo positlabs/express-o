@@ -1,5 +1,13 @@
 # express-o
-Boilerplate stuff for express projects. 
+
+Boilerplate stuff for express projects. Includes...
+
+- livereload for styles
+- es6 client-side javascript
+- local pm2 server for keeping logs and automatically restarting when files change
+
+
+## Installation
 
 [Download ZIP](https://github.com/positlabs/express-o/archive/master.zip)
 
@@ -8,12 +16,6 @@ Or run this command to install into the current directory.
 ```bash
 curl -LO https://github.com/positlabs/express-o/archive/master.zip && unzip master.zip && rm master.zip && cp -R express-o-master/ ./ && rm ./express-o-master
 ```
-
-Includes...
-
-- livereload for styles
-- es6 client-side javascript
-- local pm2 server for keeping logs and automatically restarting when files change
 
 ## Development
 
