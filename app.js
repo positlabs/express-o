@@ -7,6 +7,8 @@ const bodyParser = require('body-parser')
 
 // https://github.com/sass/node-sass-middleware
 const sass = require('node-sass-middleware')
+// const postcssMiddleware = require('postcss-middleware')
+// const autoprefixer = require('autoprefixer')
 
 // https://github.com/ForbesLindesay/browserify-middleware
 const browserify = require('browserify-middleware')
@@ -32,9 +34,24 @@ app.use(sass({
 	dest: path.join(__dirname, 'public'),
 	indentedSyntax: true,
 	outputStyle: 'compressed',
-	sourceMap: app.get('env') !== 'production',
+	sourceMap: false,
+	// sourceMap: app.get('env') !== 'production',
 	debug: app.get('env') !== 'production'
 }))
+
+// autoprefixer
+// app.use('/styles/', postcssMiddleware({
+// 	plugins: [
+// 		autoprefixer({
+// 			browsers: ['last 2 versions']
+// 		})
+// 	],
+// 	src: function(req) {
+// 		console.log('||||||||||||||||||', req.url, path.parse(req.url).ext, path.parse(req.url).ext.match('.css') !== null)
+// 		if(path.parse(req.url).ext.match('.css') !== null) return []
+// 		return path.join(path.join(__dirname, 'public/styles/'), req.url);
+// 	}
+// }))
 
 browserify.settings({
 	transform: [

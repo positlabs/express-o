@@ -4,7 +4,7 @@ const app = express()
 
 router.get('/', (req, res, next) => {
 	res.render('index', { 
-		title: 'k+',
+		title: 'express-o',
 		env: app.get('env')
 	})
 })
