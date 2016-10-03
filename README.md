@@ -14,7 +14,7 @@ Boilerplate stuff for express projects. Includes...
 Or run this command to install into the current directory. 
 
 ```bash
-curl -LO https://github.com/positlabs/express-o/archive/master.zip && unzip master.zip && rm master.zip && cp -R express-o-master/ ./ && rm ./express-o-master
+curl -LO https://github.com/positlabs/express-o/archive/master.zip && unzip master.zip && rm master.zip && cp -R express-o-master/ ./ && rm -R ./express-o-master
 ```
 
 ## Development
