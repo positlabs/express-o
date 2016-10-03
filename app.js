@@ -60,8 +60,9 @@ browserify.settings({
 })
 app.use('/js', (req, res) => { 
 	browserify( path.join(__dirname, 'public/js'), { cache: true, precompile: true })(req, res, err => { 
-		console.error(err.message)
-		res.status(500).send(err.message)
+		console.error('Browserify error! ' + err)
+		err.status = 500
+		next(err)
 	})
 })
 
@@ -92,7 +93,7 @@ if (app.get('env') !== 'production') {
 				'title': 'Error',
 				'message': err.message
 			})
-			next()
+			return next(err)
 		})
 	}
 
