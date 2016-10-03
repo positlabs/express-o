@@ -58,10 +58,12 @@ browserify.settings({
 		['babelify', {presets: ['es2015']}] // compile client-side js as es6
 	]
 })
-app.use('/js', browserify( path.join(__dirname, 'public/js'), {
-	cache: true,
-	precompile: true
-} ))
+app.use('/js', (req, res) => { 
+	browserify( path.join(__dirname, 'public/js'), { cache: true, precompile: true })(req, res, err => { 
+		console.error(err.message)
+		res.status(500).send(err.message)
+	})
+})
 
 app.use(express.static( path.join(__dirname, 'public') ))
 
