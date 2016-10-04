@@ -9,7 +9,8 @@
 			"docs",
 			"dev",
 			"npm-debug.log",
-			"README.md"
+			"README.md",
+			".git"
 		],
 		"watch": true,
 		"env": {

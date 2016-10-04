@@ -117,10 +117,15 @@ if (app.get('env') !== 'production') {
 	const chokidar = require('chokidar')
 	const request = require('request')
 	const styleWatcher = chokidar.watch(__dirname + '/public/styles/**/*.s*ss')
-	styleWatcher.on('change', path => {
-		console.log('CHANGED STYLE:', path)
-		//TODO: infer path so this will work with any css file, not just style.css
-		request('http://localhost:3000/styles/style.css', (err, response) => {
+	styleWatcher.on('change', filepath => {
+		// infer path so this will work with any css file
+		var localhostPath = filepath.split('public/')[1].split('.')[0] + '.css'
+		localhostPath = `http://localhost:${app.get('port')}/${localhostPath}`
+		console.log('CHANGED STYLE:', localhostPath)
+		
+		// grab the css to trigger livereload
+		request(localhostPath, (err, response) => {
+		// request('http://localhost:3000/styles/style.css', (err, response) => {
 			// console.log(err, response)
 		})
 	})
