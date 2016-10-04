@@ -1,20 +1,17 @@
 const express = require('express')
 const path = require('path')
 const favicon = require('serve-favicon')
-const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
+const log = require('./routes/modules/log')
 
 // https://github.com/sass/node-sass-middleware
 const sass = require('node-sass-middleware')
-// const postcssMiddleware = require('postcss-middleware')
-// const autoprefixer = require('autoprefixer')
 
 // https://github.com/ForbesLindesay/browserify-middleware
 const browserify = require('browserify-middleware')
 
 const routes = require('./routes/index')
-
 const app = express()
 
 // view engine setup
@@ -23,7 +20,6 @@ app.set('view engine', 'jade')
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
-app.use(logger('dev'))
 
 app.use(bodyParser.json({limit: '10mb'}))
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}))
@@ -38,20 +34,6 @@ app.use(sass({
 	debug: app.get('env') !== 'production'
 }))
 
-// autoprefixer
-// app.use('/styles/', postcssMiddleware({
-// 	plugins: [
-// 		autoprefixer({
-// 			browsers: ['last 2 versions']
-// 		})
-// 	],
-// 	src: function(req) {
-// 		console.log('||||||||||||||||||', req.url, path.parse(req.url).ext, path.parse(req.url).ext.match('.css') !== null)
-// 		if(path.parse(req.url).ext.match('.css') !== null) return []
-// 		return path.join(path.join(__dirname, 'public/styles/'), req.url);
-// 	}
-// }))
-
 browserify.settings({
 	transform: [
 		// 'jadeify', // client-side jade template functions
@@ -60,7 +42,7 @@ browserify.settings({
 })
 app.use('/js', (req, res) => { 
 	browserify( path.join(__dirname, 'public/js'), { cache: true, precompile: true })(req, res, err => { 
-		console.error('Browserify error! ' + err)
+		log.error('Browserify error! ' + err)
 		err.status = 500
 		next(err)
 	})
@@ -99,7 +81,7 @@ if (app.get('env') !== 'production') {
 
 	// notify dev of errors in console, and send to client
 	app.use((err, req, res, next) => {
-		console.error(err.message)
+		log.error(err.message)
 		res.status(err.status || 500)
 		res.render('error', {
 			message: err.message,
@@ -121,13 +103,10 @@ if (app.get('env') !== 'production') {
 		// infer path so this will work with any css file
 		var localhostPath = filepath.split('public/')[1].split('.')[0] + '.css'
 		localhostPath = `http://localhost:${app.get('port')}/${localhostPath}`
-		console.log('CHANGED STYLE:', localhostPath)
+		log.info('CHANGED STYLE:', localhostPath)
 		
 		// grab the css to trigger livereload
-		request(localhostPath, (err, response) => {
-		// request('http://localhost:3000/styles/style.css', (err, response) => {
-			// console.log(err, response)
-		})
+		request(localhostPath, (err, response) => {})
 	})
 }
 

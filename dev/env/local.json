@@ -15,7 +15,8 @@
 		"watch": true,
 		"env": {
 			"NODE_ENV": "local",
-			"PORT": 3000
+			"PORT": 3000,
+			"GCLOUD_PROJECT": "chevy-bolt"
 		}
 	}]
 }
