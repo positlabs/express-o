@@ -41,7 +41,10 @@ browserify.settings({
 	]
 })
 app.use('/js', (req, res) => { 
-	browserify( path.join(__dirname, 'public/js'), { cache: true, precompile: true })(req, res, err => { 
+	browserify( path.join(__dirname, 'public/js'), { 
+		cache: app.get('env') === 'production',
+		precompile: true 
+	})(req, res, err => { 
 		log.error('Browserify error! ' + err)
 		err.status = 500
 		next(err)
