@@ -31,7 +31,8 @@ class BaseView extends EventEmitter {
 	}
 
 	/*
-		accepts a hash of html events
+		optionally accepts a hash of html events
+		infers events object from this.events, if none are specified
 
 		{
 			'HTMLEventName selector': 'handlerName',
