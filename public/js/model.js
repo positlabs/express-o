@@ -5,8 +5,7 @@ const EventEmitter = require('wolfy87-eventemitter')
 	Simple model that supports shallow property change watchers
 
 	NOTE: all values must be defined in the object passed to the constructor!
-			...else events will not work
-
+			... otherwise, use model.define(prop, value) to activate events
 
 	var model = new Model({
 		str: 'hello',
@@ -59,7 +58,7 @@ class Model extends EventEmitter {
 				if(newValue === this._properties[key]) return
 				var oldValue = this._properties[key]
 				this._properties[key] = newValue
-				model.emit(key, newValue, oldValue)
+				this.emit(key, newValue, oldValue)
 			},
 			enumerable: true
 		})

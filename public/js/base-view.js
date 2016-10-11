@@ -22,6 +22,7 @@ class BaseView extends EventEmitter {
 
 			// optionally pass events object.
 			// alternative to calling view.delegateEvents()
+			// only works if element is also supplied to constructor
 			events: Object (optional)
 		})
 	*/
