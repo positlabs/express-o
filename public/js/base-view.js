@@ -20,19 +20,24 @@ class BaseView extends EventEmitter {
 			el: HTMLElement (optional)
 			$el: jQuery instance (optional)
 
+			// optionally pass events object.
+			// alternative to calling view.delegateEvents()
+			events: Object (optional)
 		})
 	*/
 	constructor(options){
 		super()
 		// console.log('BaseView', arguments)
-		if(options && (options.$el || options.el){
-			this.setElement(options.$el ? options.$el : options.el)
+		if(options && (options.$el || options.el)){
+			this.setElement(options.$el || options.el)
+			if(options.events || this.events){
+				this.delegateEvents(options.events || this.events)
+			}
 		}
 	}
 
 	/*
-		optionally accepts a hash of html events
-		infers events object from this.events, if none are specified
+		accepts a hash of html events
 
 		{
 			'HTMLEventName selector': 'handlerName',
@@ -59,7 +64,7 @@ class BaseView extends EventEmitter {
 			this.$el 	// jquery object
 	*/
 	setElement(duckTypedElement){
-		if(obj instanceof jQuery){
+		if(duckTypedElement instanceof jQuery){
 			this.$el = duckTypedElement
 			this.el = duckTypedElement[0]
 		}else{
