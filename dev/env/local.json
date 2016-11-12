@@ -2,6 +2,7 @@
 	"apps" : [{
 		"name"        : "www",
 		"script"      : "./bin/www",
+		"node_args"   : "--inspect",
 		"ignore_watch": [
 			"node_modules", 
 			"public",
