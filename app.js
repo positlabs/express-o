@@ -28,22 +28,25 @@ app.use(cookieParser())
 app.use(sass({
 	src: path.join(__dirname, 'public'),
 	dest: path.join(__dirname, 'public'),
-	indentedSyntax: true,
+	indentedSyntax: false,
 	outputStyle: 'compressed',
 	sourceMap: app.get('env') !== 'production',
 	debug: app.get('env') !== 'production'
 }))
 
-browserify.settings({
-	transform: [
-		// 'jadeify', // client-side jade template functions
-		['babelify', {presets: ['es2015']}] // compile client-side js as es6
-	]
-})
+// no need to transform libs. takes too long
+app.use('/js/globals.js', browserify( path.join(__dirname, 'public/js/globals.js'), {
+	cache: true,
+	precompile: true,
+}))
+
 app.use('/js', (req, res) => { 
 	browserify( path.join(__dirname, 'public/js'), { 
 		cache: app.get('env') === 'production',
-		precompile: true 
+		precompile: true,
+		transform: [
+			['babelify', {presets: ['es2016']}] // compile client-side js as es6
+		]
 	})(req, res, err => { 
 		log.error('Browserify error! ' + err)
 		err.status = 500

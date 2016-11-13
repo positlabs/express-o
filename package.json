@@ -1,14 +1,14 @@
 {
   "name": "express-o",
   "repository": "https://github.com/positlabs/express-o",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": false,
   "scripts": {
     "start": "node ./bin/www",
     "start-local": "pm2 start ./dev/env/local.json && pm2 logs"
   },
   "dependencies": {
-    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-es2016": "^6.16.0",
     "babelify": "^7.3.0",
     "body-parser": "~1.13.2",
     "browserify-middleware": "^7.1.0",
@@ -28,6 +28,6 @@
     "wolfy87-eventemitter": "^5.1.0"
   },
   "engines": {
-    "node": "4.5.0"
+    "node": "6.9.1"
   }
 }
