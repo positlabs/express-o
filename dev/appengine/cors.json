@@ -1,0 +1,14 @@
+[
+	{
+		"origin": [
+			
+			"http://localhost:3000",
+
+			"http://express-o.appspot.com",
+			"https://express-o.appspot.com"
+		],
+		"responseHeader": ["Content-Type"],
+		"method": ["GET"],
+		"maxAgeSeconds": 3600
+	}
+]

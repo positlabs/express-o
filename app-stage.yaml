@@ -1,0 +1,23 @@
+# https://cloud.google.com/appengine/docs/flexible/nodejs/configuring-your-app-with-app-yaml
+
+runtime: nodejs
+env: flex
+
+resources:
+  cpu: 1
+  memory_gb: 4
+  disk_size_gb: 20
+
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 2
+  cool_down_period_sec: 120 # default value
+  cpu_utilization:
+    target_utilization: 0.5
+
+skip_files:
+ - ^node_modules$
+ - ^public/assets/$
+
+env_variables:
+  NODE_ENV: 'production'
