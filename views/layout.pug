@@ -5,8 +5,18 @@ html
 		title= title
 		link(rel='stylesheet', href='/styles/style.css')
 
-		if env === 'local'
+		meta(property="og:url" content="https://express-o.appspot.com")
+		meta(property="og:title" content=title)
+		meta(property="og:description" content="Description")
+		meta(property="og:image" content='#{CDN}assets/images/share.jpg')
+
+		script.
+			var CDN = "#{CDN}"
+
+		if ENV === 'local'
 			script(src='//localhost:35729/livereload.js?snipver=1')
+			script.
+				var ENV = "#{ENV}"
 
 	body
 		block content
