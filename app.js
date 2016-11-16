@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const fs = require('fs')
 const CDN = require('./routes/modules/CDN')
 const log = require('./routes/modules/log')
+const scssInjector = require('inject-scss')
 
 // https://github.com/sass/node-sass-middleware
 const sass = require('node-sass-middleware')
@@ -27,8 +28,7 @@ app.use(bodyParser.json({limit: '10mb'}))
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}))
 app.use(cookieParser())
 
-// config for scss CDN path
-fs.writeFileSync(path.join(__dirname, 'public/styles/_inject.scss'), `$CDN: "${CDN}";`, 'utf8');
+scssInjector(path.join(__dirname, 'public/styles/_inject.scss'), {CDN})
 
 app.use(sass({
 	src: path.join(__dirname, 'public'),
