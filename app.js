@@ -4,6 +4,7 @@ const favicon = require('serve-favicon')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const fs = require('fs')
+const CDN = require('./routes/modules/CDN')
 const log = require('./routes/modules/log')
 
 // https://github.com/sass/node-sass-middleware
