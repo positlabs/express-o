@@ -3,6 +3,7 @@ const path = require('path')
 const favicon = require('serve-favicon')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
+const fs = require('fs')
 const log = require('./routes/modules/log')
 
 // https://github.com/sass/node-sass-middleware
@@ -24,6 +25,9 @@ app.set('view engine', 'pug')
 app.use(bodyParser.json({limit: '10mb'}))
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}))
 app.use(cookieParser())
+
+// config for scss CDN path
+fs.writeFileSync(path.join(__dirname, 'public/styles/_inject.scss'), `$CDN: "${CDN}";`, 'utf8');
 
 app.use(sass({
 	src: path.join(__dirname, 'public'),

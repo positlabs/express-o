@@ -29,7 +29,8 @@
     "request": "^2.78.0",
     "serve-favicon": "~2.3.0",
     "winston": "^2.2.0",
-    "wolfy87-eventemitter": "^5.1.0"
+    "wolfy87-eventemitter": "^5.1.0",
+    "x-tag": "^1.5.11"
   },
   "engines": {
     "node": "6.9.1"
