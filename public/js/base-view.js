@@ -52,7 +52,7 @@ class BaseView extends EventEmitter {
 			var delimited = key.split(' ')
 			var evt = delimited.shift()
 			delimited = delimited.join(' ')
-			this.$el.delegate(delimited, evt, e => { this[handlerName](e) })
+			this.$el.on(delimited, evt, e => { this[handlerName](e) })
 			// console.log(delimited, evt, this[handlerName])
 		})
 	}
