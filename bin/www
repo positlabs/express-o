@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
 const app = require('../app')
-const log = require('../routes/modules/log')
 
-log.info(`
+console.info(`
 	===================================
 	STARTING THE SERVER
 	process.env.PORT: ${process.env.PORT}
@@ -74,11 +73,11 @@ function onError(error) {
 	// handle specific listen errors with friendly messages
 	switch (error.code) {
 		case 'EACCES':
-			log.error(bind + ' requires elevated privileges')
+			console.error(bind + ' requires elevated privileges')
 			process.exit(1)
 			break
 		case 'EADDRINUSE':
-			log.error(bind + ' is already in use')
+			console.error(bind + ' is already in use')
 			process.exit(1)
 			break
 		default:
@@ -95,5 +94,5 @@ function onListening() {
 	var bind = typeof addr === 'string'
 		? 'pipe ' + addr
 		: 'port ' + addr.port
-	log.info('Listening on ' + bind)
+	console.info('Listening on ' + bind)
 }

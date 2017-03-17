@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const fs = require('fs')
 const CDN = require('./routes/modules/CDN')
-const log = require('./routes/modules/log')
 const scssInjector = require('inject-scss')
 
 // https://github.com/sass/node-sass-middleware
@@ -53,7 +52,7 @@ app.use('/js', (req, res) => {
 			['babelify', {presets: ['es2016']}] // compile client-side js as es6
 		]
 	})(req, res, err => { 
-		log.error('Browserify error! ' + err)
+		console.error('Browserify error! ' + err)
 		err.status = 500
 		next(err)
 	})
@@ -92,7 +91,7 @@ if (app.get('env') !== 'production') {
 
 	// notify dev of errors in console, and send to client
 	app.use((err, req, res, next) => {
-		log.error(err.message)
+		console.error(err)
 		res.status(err.status || 500)
 		res.render('error', {
 			message: err.message,
@@ -114,7 +113,7 @@ if (app.get('env') !== 'production') {
 		// infer path so this will work with any css file
 		var localhostPath = filepath.split('public/')[1].split('.')[0] + '.css'
 		localhostPath = `http://localhost:${app.get('port')}/${localhostPath}`
-		log.info('CHANGED STYLE:', localhostPath)
+		console.info('CHANGED STYLE:', localhostPath)
 		
 		// grab the css to trigger livereload
 		request(localhostPath, (err, response) => {})
@@ -124,6 +123,7 @@ if (app.get('env') !== 'production') {
 // production error handler
 // no stacktraces leaked to user
 app.use((err, req, res, next) => {
+	console.error(err)
 	res.status(err.status || 500)
 	res.render('error', {
 		message: err.message,

@@ -1,7 +1,10 @@
-extends layout
+doctype html
+html
+	head
+		include head
 
-block content
-	h1= title
-	p v#{version}
+	body
+		h1= title
+		p v#{version}
 
-	script(src='js/index.js')
+		script(src='js/index.js')

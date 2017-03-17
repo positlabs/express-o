@@ -3,31 +3,32 @@
 
 const ComponentBase = require('./component-base')
 
-xtag.register('x-boilerplate', {
+const prototype = ComponentBase.prototype
 
-	prototype: ComponentBase.prototype,
-
-	lifecycle: {
-		created(){
-			this.delegateEvents({})
-		},
-		inserted(){},
-		removed(){},
-		attributeChanged(){}
+const lifecycle = {
+	created(){
+		this.delegateEvents({})
 	},
+	inserted(){},
+	removed(){},
+	attributeChanged(){}
+}
 
-	accessors: {
-		label: {
-			attribute: {}
-		}
-	}, 
-
-	methods: {
-		render (){
-			this.innerHTML = `
-				<h1>hello</h1>
-			`
-		}
+const accessors = {
+	label: {
+		attribute: {}
 	}
+}
+
+const methods = {
+	render (){
+		this.innerHTML = `
+			<h1>hello</h1>
+		`
+	}
+}
+
+module.exports = xtag.register('x-boilerplate', {
+	prototype, lifecycle, accessors, methods
 })
 

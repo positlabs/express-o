@@ -1,4 +1,3 @@
-require('./globals')
 
 // woah es6!
 console.log(`
