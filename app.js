@@ -44,7 +44,7 @@ app.use('/js/globals.js', browserify( path.join(__dirname, 'public/js/globals.js
 	precompile: true,
 }))
 
-app.use('/js', (req, res) => { 
+app.use('/js', (req, res, next) => { 
 	browserify( path.join(__dirname, 'public/js'), { 
 		cache: app.get('env') === 'production',
 		precompile: true,
