@@ -1,8 +1,8 @@
 
 // http://x-tags.org/docs
 
+const componentName = 'x-boilerplate'
 const ComponentBase = require('./component-base')
-
 const prototype = ComponentBase.prototype
 
 const lifecycle = {
@@ -22,13 +22,13 @@ const accessors = {
 
 const methods = {
 	render (){
-		this.innerHTML = `
-			<h1>hello</h1>
-		`
+		xtag.innerHTML(this, `
+			<h1>${componentName}</h1>
+		`)
 	}
 }
 
-module.exports = xtag.register('x-boilerplate', {
+module.exports = xtag.register(componentName, {
 	prototype, lifecycle, accessors, methods
 })
 
