@@ -91,7 +91,7 @@ if (app.get('env') !== 'production') {
 
 	// notify dev of errors in console, and send to client
 	app.use((err, req, res, next) => {
-		console.error(err)
+		console.error(err, req.path)
 		res.status(err.status || 500)
 		res.render('error', {
 			message: err.message,
