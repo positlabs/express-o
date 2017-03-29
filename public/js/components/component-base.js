@@ -45,9 +45,8 @@ const ComponentBase = xtag.register('component-base', {
 				var handlerName = events[key]
 				var delimited = key.split(' ')
 				var evt = delimited.shift()
-				delimited = delimited.join(' ')
-				this.$el.on(delimited, evt, e => { this[handlerName](e) })
-				// console.log(delimited, evt, this[handlerName])
+				var selector = delimited.join(' ')
+				this.$el.on(evt, selector, e => { this[handlerName](e) })
 			})
 		}
 	}
