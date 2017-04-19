@@ -10,10 +10,9 @@ meta(property="og:image" content='#{CDN}assets/images/share.jpg')
 
 script.
 	var CDN = "#{CDN}"
-
+	var ENV = "#{ENV}"
+	
 if ENV === 'local'
 	script(src='//localhost:35729/livereload.js?snipver=1')
-	script.
-		var ENV = "#{ENV}"
 
 script(src='js/globals.js')
