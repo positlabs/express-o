@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "deploy-dev": "gcloud app deploy app-dev.yaml -v dev --no-promote && gcloud app browse",
+    "deploy-stage": "gcloud app deploy app-stage.yaml -v stage --no-promote && gcloud app browse",
+    "deploy-prod": "gcloud app deploy app.yaml -v production && gcloud app browse",
+    "upload-cdn": "./dev/appengine/upload-cdn.sh",
+    "set-cors": "gsutil cors set ./dev/appengine/cors.json gs://express-o-bucket"
+  },
+}
