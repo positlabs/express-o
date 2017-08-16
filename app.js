@@ -1,6 +1,5 @@
 const express = require('express')
 const path = require('path')
-const favicon = require('serve-favicon')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const shrinkRay = require('shrink-ray')
@@ -23,7 +22,6 @@ app.set('view engine', 'pug')
 
 app.use(shrinkRay())
 
-// app.use(favicon(path.join(__dirname, 'public', 'assets', 'favicon.ico')))
 app.use(bodyParser.json({limit: '10mb'}))
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}))
 app.use(cookieParser())
@@ -87,6 +85,10 @@ if (app.get('env') !== 'production') {
 			return next(err)
 		})
 	}
+
+	const livereload = require('livereload')
+	const server = livereload.createServer({exts: ['scss']})
+	server.watch(__dirname + '/public/styles')
 
 	// notify dev of errors in console, and send to client
 	app.use((err, req, res, next) => {
