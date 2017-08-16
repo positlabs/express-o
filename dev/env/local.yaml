@@ -1,0 +1,19 @@
+apps:
+  - script: ./bin/www
+    name: www
+    node_args: --inspect
+    ignore_watch:
+      - node_modules
+      - public
+      - .DS_Store
+      - docs
+      - dev
+      - views
+      - npm-debug.log
+      - README.md
+      - .git
+    watch: true
+    env:
+      NODE_ENV: local
+      PORT: 3000
+      DEBUG: true

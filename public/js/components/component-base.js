@@ -31,6 +31,10 @@ const ComponentBase = xtag.register('component-base', {
 			return this.$el.find(selector)
 		},
 
+		$$(selector){
+			return this.querySelector(selector)
+		},
+		
 		/*
 			accepts a hash of html events
 

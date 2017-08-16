@@ -76,8 +76,6 @@ app.use((req, res, next) => {
 // will print stacktrace
 if (app.get('env') !== 'production') {
 
-	const livereload = require('express-livereload')
-
 	// notify dev of errors in a notification
 	if(app.get('env') === 'local'){
 		const notifier = require('node-notifier')
@@ -100,25 +98,6 @@ if (app.get('env') !== 'production') {
 		})
 	})
 
-	// hotswap styles
-	livereload(app, {
-		watchDir: __dirname + '/public/styles/',
-		exts: ['css'], // only watch css
-		exclusions: ['map', 'scss', 'sass'] // exclude scss and map because it will refresh the whole page
-	})
-
-	const chokidar = require('chokidar')
-	const request = require('request')
-	const styleWatcher = chokidar.watch(__dirname + '/public/styles/**/*.s*ss')
-	styleWatcher.on('change', filepath => {
-		// infer path so this will work with any css file
-		var localhostPath = filepath.split('public/')[1].split('.')[0] + '.css'
-		localhostPath = `http://localhost:${app.get('port')}/${localhostPath}`
-		console.info('CHANGED STYLE:', localhostPath)
-		
-		// grab the css to trigger livereload
-		request(localhostPath, (err, response) => {})
-	})
 }
 
 // production error handler

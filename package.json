@@ -1,12 +1,12 @@
 {
   "name": "express-o",
   "repository": "https://github.com/positlabs/express-o",
-  "version": "1.5.0",
+  "version": "2.0.0",
   "license": "MIT",
   "private": false,
   "scripts": {
     "start": "node ./bin/www",
-    "start-local": "pm2 start ./dev/env/local.json && pm2 logs"
+    "start-local": "pm2 start ./dev/env/local.yaml && pm2 logs"
   },
   "dependencies": {
     "babel-preset-es2016": "^6.16.0",
@@ -31,6 +31,6 @@
     "x-tag": "^1.5.11"
   },
   "engines": {
-    "node": "6.9.1"
+    "node": "8.4.0"
   }
 }
