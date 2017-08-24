@@ -1,9 +1,11 @@
 {
   "scripts": {
-    "deploy-dev": "gcloud app deploy app-dev.yaml -v dev --no-promote && gcloud app browse",
-    "deploy-stage": "gcloud app deploy app-stage.yaml -v stage --no-promote && gcloud app browse",
-    "deploy-prod": "gcloud app deploy app.yaml -v production && gcloud app browse",
-    "upload-cdn": "./dev/appengine/upload-cdn.sh",
+    "deploy:dev": "gcloud app deploy app-dev.yaml -v dev --no-promote && gcloud app browse",
+    "deploy:stage": "gcloud app deploy app-stage.yaml -v stage --no-promote && gcloud app browse",
+    "deploy:prod": "gcloud app deploy app.yaml -v production && gcloud app browse",
+    "upload:cdn:dev": "./dev/appengine/upload-cdn.sh gs://express-o-dev",
+    "upload:cdn:stage": "./dev/appengine/upload-cdn.sh gs://express-o-stage",
+    "upload:cdn:prod": "./dev/appengine/upload-cdn.sh gs://express-o",
     "set-cors": "gsutil cors set ./dev/appengine/cors.json gs://express-o-bucket"
-  },
+  }
 }

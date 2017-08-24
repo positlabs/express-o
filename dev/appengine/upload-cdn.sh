@@ -1,4 +1,8 @@
-BUCKET="gs://express-o/"
+#!/bin/bash
+
+BUCKET=$1
+
+echo "UPLOADING TO " $BUCKET
 
 # upload with gzip compression
 cd public
