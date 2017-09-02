@@ -20,4 +20,4 @@ skip_files:
  - ^public/assets/$
 
 env_variables:
-  NODE_ENV: 'production'
+  APP_ENV: stage

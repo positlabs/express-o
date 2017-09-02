@@ -6,6 +6,7 @@ const shrinkRay = require('shrink-ray')
 const fs = require('fs')
 const CDN = require('./routes/modules/CDN')
 const scssInjector = require('inject-scss')
+const os = require('os')
 
 // https://github.com/sass/node-sass-middleware
 const sass = require('node-sass-middleware')
@@ -20,7 +21,10 @@ const app = express()
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
 
-app.use(shrinkRay())
+// brotli doesn't work on windows
+if(os.platform !== 'win32'){
+	app.use(shrinkRay())
+}
 
 app.use(bodyParser.json({limit: '10mb'}))
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}))

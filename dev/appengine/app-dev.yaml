@@ -20,5 +20,5 @@ skip_files:
  - ^public/assets/$
  
 env_variables:
-  NODE_ENV: 'development'
+  APP_ENV: dev
   DEBUG: true
