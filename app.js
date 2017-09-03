@@ -52,7 +52,13 @@ app.use('/js', (req, res, next) => {
 		cache: app.get('env') === 'production',
 		precompile: true,
 		transform: [
-			['babelify', {presets: ['es2016']}] // compile client-side js as es6
+			['babelify', {
+				presets: [['env', {
+					targets: {
+						browsers: ['last 2 versions']
+					}
+				}]]
+			}]
 		]
 	})(req, res, err => { 
 		console.error('Browserify error! ' + err)
