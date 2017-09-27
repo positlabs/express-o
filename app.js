@@ -60,7 +60,7 @@ app.use('/js', (req, res, next) => {
 				}]]
 			}]
 		]
-	})(req, res, err => { 
+	})(req, res, (req, res, err) => { 
 		console.error('Browserify error! ' + err)
 		err.status = 500
 		next(err)
