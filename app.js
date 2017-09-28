@@ -51,10 +51,10 @@ app.use('/js/globals.js', browserify( path.join(__dirname, 'public/js/globals.js
 
 app.use('/js', 
 	browserify( path.join(__dirname, 'public/js'), { 
+		precompile: ENV !== 'local',
 		minify: ENV !== 'local',
 		cache: ENV !== 'local',
 		debug: ENV === 'local',
-		precompile: true,
 		transform: [
 			['babelify', {
 				presets: [['env', {
