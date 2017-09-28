@@ -16,6 +16,7 @@ const browserify = require('browserify-middleware')
 
 const routes = require('./routes/index')
 const app = express()
+const ENV = app.get('env')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
@@ -45,11 +46,14 @@ app.use(sass({
 app.use('/js/globals.js', browserify( path.join(__dirname, 'public/js/globals.js'), {
 	cache: true,
 	precompile: true,
+	minify: true
 }))
 
-app.use('/js', (req, res, next) => { 
+app.use('/js', 
 	browserify( path.join(__dirname, 'public/js'), { 
-		cache: app.get('env') === 'production',
+		minify: ENV !== 'local',
+		cache: ENV !== 'local',
+		debug: ENV === 'local',
 		precompile: true,
 		transform: [
 			['babelify', {
@@ -60,12 +64,13 @@ app.use('/js', (req, res, next) => {
 				}]]
 			}]
 		]
-	})(req, res, (req, res, err) => { 
+	}),
+	(req, res, err) => { 
 		console.error('Browserify error! ' + err)
 		err.status = 500
 		next(err)
-	})
-})
+	}
+)
 
 app.use(express.static( path.join(__dirname, 'public') ))
 
