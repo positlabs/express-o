@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const app = express()
 const pkg = require('../package.json')
-const CDN = require('./modules/CDN')
+const CDN = require('./modules/cdn')
 
 var ENV = app.get('env')
 
