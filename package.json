@@ -1,12 +1,16 @@
 {
   "name": "express-o",
   "repository": "https://github.com/positlabs/express-o",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "license": "MIT",
   "private": false,
   "scripts": {
     "start": "node ./bin/www",
-    "start-local": "pm2 start ./dev/env/local.yaml && pm2 logs"
+    "start:local": "pm2 start ./dev/env/local.yaml && pm2 logs",
+    "localtunnel": "lt --port 3000",
+    "info:repo": "basename -s .git `git config --get remote.origin.url`",
+    "info:branch": "git rev-parse --abbrev-ref HEAD",
+    "info:tag": "echo $(npm run -s info:repo)-$(npm run -s info:branch)"
   },
   "dependencies": {
     "babel-preset-env": "^1.6.0",

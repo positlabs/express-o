@@ -1,0 +1,22 @@
+{
+    "info:repo": "basename -s .git `git config --get remote.origin.url`",
+    "info:branch": "git rev-parse --abbrev-ref HEAD",
+    "info:tag": "echo $(npm run -s info:repo)-$(npm run -s info:branch)",
+    "docker:tag": "echo gcr.io/$(npm run -s info:repo)/$(npm run -s info:tag)",
+    "docker:shell": "docker run -e \"NODE_ENV=local\" -it -p 8080:8080 --cpus 2 -m 4G --shm-size 1G -v `pwd`/:/app/ $(npm run -s docker:tag) bash",
+    "docker:build": "docker build -t $(npm run -s docker:tag) ./",
+    "docker:clean": "docker rmi \"$(npm run -s docker:tag)\"",
+    "gcloud:upload": "gcloud docker -- push $(npm run -s docker:tag)",
+    "gcloud:deploy": "npm run docker:build && npm run gcloud:upload && npm run gcloud:cluster:update",
+    "gcloud:deployment:tag": "echo $(npm run -s info:branch)-deployment",
+    "gcloud:deployment:create": "kubectl create -f ./$(npm run -s gcloud:deployment:tag).yaml --validate=false",
+    "gcloud:deployment:autoscale": "kubectl autoscale deployment $(npm run -s gcloud:deployment:tag) --min=3 --max=30 --cpu-percent=65",
+    "gcloud:deployment:status": "kubectl rollout status deployment/$(npm run -s gcloud:deployment:tag)",
+    "gcloud:deployment:expose": "npm run gcloud:cluster:context && kubectl expose deployment $(npm run -s gcloud:deployment:tag) --type=LoadBalancer --port 8080",
+    "gcloud:cluster:tag": "echo $(npm run info:tag)-cluster",
+    "gcloud:cluster:create": "gcloud container clusters create $(npm run -s gcloud:cluster:tag) --machine-type=n1-standard-16 --local-ssd-count=1 --zone=us-central1-a --num-nodes=1 --enable-autoscaling --min-nodes=1 --max-nodes=20",
+    "gcloud:cluster:update": "npm run gcloud:cluster:context && DATE=$(date) && sed -ie \"s/DATE_VALUE/$DATE/g\" $(npm run -s gcloud:deployment:tag).yaml && kubectl apply -f ./$(npm run -s gcloud:deployment:tag).yaml --validate=false && sed -ie \"s/$DATE/DATE_VALUE/g\" $(npm run -s gcloud:deployment:tag).yaml",
+    "gcloud:cluster:context": "gcloud container clusters get-credentials $(npm run -s gcloud:cluster:tag)",
+    "gcloud:cluster:status": "npm run gcloud:cluster:context && kubectl get pods",
+    "gcloud:cluster:logs": "open \"https://console.cloud.google.com/logs/viewer?project=$(npm run -s info:repo)&minLogLevel=0&expandAll=false&resource=container%2Fcluster_name%2F$(npm run -s gcloud:cluster:tag)\""
+}
