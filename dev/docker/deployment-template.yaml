@@ -1,0 +1,40 @@
+# TODO: make a generator from a template file 
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: renderer-dev-deployment
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: reponame
+    spec:
+      volumes:
+      - name: local-ssd
+        hostPath:
+          path: /mnt/disks/ssd0
+      - name: dshm
+        emptyDir:
+          medium: Memory
+      containers:
+      - image: gcr.io/reponame/imagename
+        name: renderer-dev
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8080
+        volumeMounts:
+          - mountPath: /dev/shm
+            name: dshm
+          - mountPath: /dev/cache
+            name: local-ssd
+        resources:
+          limits:
+            cpu: 15.5
+            memory: 58Gi
+          requests:
+            cpu: 15.5
+            memory: 58Gi
+        env:
+        - name: DATE
+          value: DATE_VALUE
