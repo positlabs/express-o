@@ -1,5 +1,5 @@
 {
-    "info:repo": "basename -s .git `git config --get remote.origin.url`",
+    "info:repo": "basename $(git remote get-url origin) .git",
     "info:branch": "git rev-parse --abbrev-ref HEAD",
     "info:tag": "echo $(npm run -s info:repo)-$(npm run -s info:branch)",
     "docker:tag": "echo gcr.io/$(npm run -s info:repo)/$(npm run -s info:tag)",
