@@ -3,7 +3,7 @@
     "info:branch": "git rev-parse --abbrev-ref HEAD",
     "info:tag": "echo $(npm run -s info:repo)-$(npm run -s info:branch)",
     "docker:tag": "echo gcr.io/$(npm run -s info:repo)/$(npm run -s info:tag)",
-    "docker:shell": "docker run -e \"NODE_ENV=local\" -it -p 8080:8080 --cpus 2 -m 4G --shm-size 1G -v `pwd`/:/app/ $(npm run -s docker:tag) bash",
+    "docker:shell": "docker run -e \"NODE_ENV=local\" -it -p 3000:3000 -p 35729:35729 --cpus 2 -m 4G --shm-size 1G -v `pwd`/:/app/ $(npm run -s docker:tag) bash",
     "docker:build": "docker build -t $(npm run -s docker:tag) ./",
     "docker:clean": "docker rmi \"$(npm run -s docker:tag)\"",
     "gcloud:upload": "gcloud docker -- push $(npm run -s docker:tag)",
