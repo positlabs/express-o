@@ -87,19 +87,17 @@ app.use((req, res, next) => {
 
 // development error handler
 // will print stacktrace
-if (app.get('env') !== 'production') {
-
+if(app.get('env') === 'local'){
+		
 	// notify dev of errors in a notification
-	if(app.get('env') === 'local'){
-		const notifier = require('node-notifier')
-		app.use((err, req, res, next) => {
-			notifier.notify({
-				'title': 'Error',
-				'message': err.message
-			})
-			return next(err)
+	const notifier = require('node-notifier')
+	app.use((err, req, res, next) => {
+		notifier.notify({
+			'title': 'Error',
+			'message': err.message
 		})
-	}
+		return next(err)
+	})
 
 	const livereload = require('livereload')
 	const server = livereload.createServer({exts: ['scss']})
@@ -114,7 +112,6 @@ if (app.get('env') !== 'production') {
 			error: err
 		})
 	})
-
 }
 
 // production error handler
