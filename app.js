@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const shrinkRay = require('shrink-ray')
 const fs = require('fs')
-const CDN = require('./routes/modules/CDN')
+const CDN = require('./routes/modules/cdn')
 const scssInjector = require('inject-scss')
 const os = require('os')
 
