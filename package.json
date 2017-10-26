@@ -1,7 +1,7 @@
 {
   "name": "express-o",
   "repository": "https://github.com/positlabs/express-o",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "license": "MIT",
   "private": false,
   "scripts": {

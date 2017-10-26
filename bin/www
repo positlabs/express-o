@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
 const app = require('../app')
+const fs = require('fs')
+const path = require('path')
+const https = require('https')
 
 console.info(`
 	===================================
@@ -10,11 +13,14 @@ console.info(`
 	===================================
 `)
 
-const http = require('http')
 const port = normalizePort(process.env.PORT || '3000')
 app.set('port', port)
 
-const server = http.createServer(app)
+let options = {
+	key: 	fs.readFileSync(path.resolve(__dirname, '../dev/certs/testing.key')),
+	cert: 	fs.readFileSync(path.resolve(__dirname, '../dev/certs/testing.crt'))
+}
+let server = https.createServer(options, app)
 
 server.listen(port)
 server.on('error', onError)
