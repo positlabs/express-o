@@ -17,3 +17,4 @@ apps:
       NODE_ENV: local
       PORT: 3000
       DEBUG: true
+      NODE_TLS_REJECT_UNAUTHORIZED: 0
