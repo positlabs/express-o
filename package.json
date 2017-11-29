@@ -32,6 +32,7 @@
     "node": "8.4.0"
   },
   "devDependencies": {
+    "envify": "^4.1.0",
     "livereload": "^0.6.2",
     "node-notifier": "^4.6.1"
   }

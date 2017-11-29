@@ -56,10 +56,12 @@ app.use('/js',
 		cache: ENV !== 'local',
 		debug: ENV === 'local',
 		transform: [
+			['envify', {NODE_ENV: ENV}]
 			['babelify', {
 				presets: [['env', {
 					targets: {
-						browsers: ['last 2 versions']
+						// https://github.com/ai/browserslist
+						browsers: ['last 2 versions', 'not ie < 11']
 					}
 				}]]
 			}]
